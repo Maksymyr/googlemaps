@@ -4,6 +4,7 @@ const middleware = store => next => action => {
     next(action);
     const data = action.payload;
     if(action.type == types.ADD_ADDRESS) {
+      //передача на сервер нового адресса для сохранения в монгоДБ
         fetch('/save', {
             method: "POST",
             headers: {
@@ -18,6 +19,7 @@ const middleware = store => next => action => {
           })
     }
     if(action.type == types.DEL_ADDRESS) {
+      //передача на сервер адресса для удаления из монгоДБ
       fetch('/del', {
           method: "POST",
           headers: {
