@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// Component for rows with addresses in table behind map
+// Компонент строки адресса в списке
 
 export default class Row extends Component {
     constructor(props) {

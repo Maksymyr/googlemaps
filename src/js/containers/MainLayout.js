@@ -49,9 +49,11 @@ export default class MainLayout extends React.Component {
             alert("Timeout");
         }
         var getCoords = () =>{
+            // передача на отрисовку по текущим или дефолтным координатам
             this.mapper(lat, lng);
+            
+            // запрос на монгоДБ для получение массива адрессов для дальнейшей отрисовка
             var self=this.props;
-            let addresses = [];
             fetch('/upload', {
                 method: "POST",
                 headers: {
@@ -93,8 +95,8 @@ export default class MainLayout extends React.Component {
             position: point, map: map, title: 'Address'
         });
     }
-    // при отправке формы с новым адрессом
 
+    // при отправке формы с новым адрессом
     handleSubmit = (event) => {
         let checkFill = 0;
         // проверка на пустоту 
@@ -105,6 +107,7 @@ export default class MainLayout extends React.Component {
             }
             else checkFill++;
         }
+        // если все поля заполнены
         if(checkFill==4) {
             let country = this.refs.country.value.trim();
             let city = this.refs.city.value.trim()
@@ -113,6 +116,7 @@ export default class MainLayout extends React.Component {
             let lat;
             let lng;
             let check ='ZERO_RESULTS';
+            // запрос координат по указанному адрессу
             fetch(`http://maps.googleapis.com/maps/api/geocode/json?address=${country}+${city}+${street}+${house}&sensor=false`, {
                 method: "GET",
                 }).then(function(response) {  
