@@ -5,7 +5,6 @@ import {bindActionCreators} from 'redux';
 import Row from '../components/Row';
 import {addAddress, addMongo, delAddress} from '../actions';
 
-
 const mapStateToProps = (state, ownProps) => {
     return {addresses: state.addresses}
 }
@@ -49,7 +48,6 @@ export default class MainLayout extends React.Component {
         function geolocFail(){
             alert("Timeout");
         }
-        // setTimeout(() => {
             var getCoords = () =>{
 
            
@@ -68,15 +66,9 @@ export default class MainLayout extends React.Component {
                     return response.text();  
                 }).then(function(text) {  
                 JSON.parse(text).map((item) => self.addMongo(item))
-                // addresses.push(item)) 
+  
             }).catch((err) => {console.log(err)})
-        // setTimeout(()=> {
-        //         if(addresses.length > 0) {
-        //             this.props.addMongo(addresses);
-        //     }
-        // },500)   
         }
-    // },1500)
     }
     handleClick (item) {
         this.setState({item})
