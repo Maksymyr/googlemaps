@@ -5,7 +5,6 @@ import {bindActionCreators} from 'redux';
 import Row from '../components/Row';
 import {addAddress, addMongo, delAddress} from '../actions';
 
-
 const mapStateToProps = (state, ownProps) => {
     return {addresses: state.addresses}
 }
@@ -25,10 +24,10 @@ export default class MainLayout extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        
+        // координаты по умолчанию, если геолокация запрещена
         var lat = 50;
         var lng = 30;
-
+            // поиск текущей геолокации
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 lat = position.coords.latitude;
@@ -49,10 +48,7 @@ export default class MainLayout extends React.Component {
         function geolocFail(){
             alert("Timeout");
         }
-        // setTimeout(() => {
-            var getCoords = () =>{
-
-           
+        var getCoords = () =>{
             this.mapper(lat, lng);
             var self=this.props;
             let addresses = [];
@@ -68,25 +64,20 @@ export default class MainLayout extends React.Component {
                     return response.text();  
                 }).then(function(text) {  
                 JSON.parse(text).map((item) => self.addMongo(item))
-                // addresses.push(item)) 
             }).catch((err) => {console.log(err)})
-        // setTimeout(()=> {
-        //         if(addresses.length > 0) {
-        //             this.props.addMongo(addresses);
-        //     }
-        // },500)   
         }
-    // },1500)
     }
+
+    // при клике  элемент из списка адрессов
     handleClick (item) {
         this.setState({item})
         console.log(item);
         var lat = item.lat;
         var lng = item.lng;
         this.mapper(lat, lng);
-
-
     }
+
+    // функция по отрисовке карты и маркера
     mapper(lat, lng) {
         var map;
         var pos = new google.maps.LatLng(lat,lng);
@@ -102,8 +93,11 @@ export default class MainLayout extends React.Component {
             position: point, map: map, title: 'Address'
         });
     }
+    // при отправке формы с новым адрессом
+
     handleSubmit = (event) => {
         let checkFill = 0;
+        // проверка на пустоту 
         for (let i = 0; i < 4; i++) {
             this.refs.form.children[i].style.backgroundColor = "transparent";
             if(this.refs.form.children[i].value.trim() == '') {
@@ -129,20 +123,25 @@ export default class MainLayout extends React.Component {
                     lng = JSON.parse(text).results[0].geometry.location.lng;                   
             }).catch((err) => {console.log(err)})
             setTimeout (() => {
+                // проверка на существование адресса
                 if (check == 'OK') {
+                    // добавление в стор редакса нового объекта (адресс + координаты)
                     this.props.addAddress({country, city, street, house, lat, lng})
                     for (let i = 0; i < 4; i++) {
                         this.refs.form.children[i].value = '';
                     }
                 }
+                // превышение лимита
                 else if (check == 'OVER_QUERY_LIMIT') {
                     alert("Over query limit!");
                 } 
+                // адресс не существует
                 else {
                     alert("No such address!");
                 }
             }, 1000)
         }
+        // не все поля заполнены
         else {
             alert("Fill all fields please!")
         };

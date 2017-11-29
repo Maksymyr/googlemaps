@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// Component for rows with addresses in table behind map
 
 export default class Row extends Component {
     constructor(props) {
@@ -7,9 +8,11 @@ export default class Row extends Component {
         this.handleItem = this.handleItem.bind(this);  
         this.handleDel = this.handleDel.bind(this);  
     }
+    // передает в основной компонент метод клика по определенному объекту вместе с данным объектом
     handleItem(){
         this.props.handleclick(this.props.item);
     }
+    // передает в основной компонент объект для удаления из стора и монгодб
     handleDel(){
         this.props.deleteItem(this.props.item);
     }
