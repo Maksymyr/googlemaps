@@ -81,7 +81,6 @@ function Server(compiler, options) {
 			//   console.log(req.body);
 			  db.collection("addresses").find({}).toArray(function(err, result) {
 				if (err) throw err;
-				// console.log(result);
 					if (result.length == 0) {
 						res.send("1");
 					}
@@ -92,7 +91,6 @@ function Server(compiler, options) {
 			});
 		})
 		app.post('/del', function(req, res) {
-			
 			MongoClient.connect(url, function(err, db) {
 			if (err) throw err;
 				db.collection("addresses").deleteOne({"city": req.body.city, "street": req.body.street, "house": req.body.house}, function(err, res) {
