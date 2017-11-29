@@ -1,1 +1,64 @@
-
+html {
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+body {
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+.main {
+    text-align: center;
+}
+.form-group:after{
+        content: "";
+        display: table;
+        clear: both;
+}
+.form-control {
+    float: left;
+    display: block;
+    width: 20%;
+    height: 14px;
+    margin: 5px 10px 20px 5px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.user-list {
+    border: 1px solid #ddd;
+    width:100%;
+}
+.user-list>tbody>tr {
+    cursor: pointer;
+    transition: background-color .1s;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+.btn-enter {
+    height: 25px;
+    width: 25px;
+    margin: 6px 10px 20px 5px;
+}
+#map { 
+    width: 100%; 
+    height: 500px; 
+}
